@@ -88,7 +88,7 @@ jobs:
       - name: Create wheel and dist package
         shell: bash -l {0}
         run: |
-          pip install setuptools_scm twine
+          pip install setuptools_scm twine build
           if [ ${{ matrix.os }} == "windows-latest" ]
           then
             # build whls on windows
