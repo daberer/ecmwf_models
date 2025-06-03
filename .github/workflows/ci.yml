@@ -62,7 +62,7 @@ jobs:
           which python
       - name: Install dependencies and package
         shell: bash -l {0}
-        run:
+        run: |
           conda update -n base conda
           conda install -c conda-forge pygrib netcdf4 pyresample pykdtree
           pip install -e .[testing]
