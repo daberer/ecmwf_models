@@ -80,7 +80,7 @@ jobs:
       - name: Upload Coverage
         shell: bash -l {0}
         run: |
-          pip install coveralls && coveralls --service=github
+          pip install coveralls && coveralls --service=github-actions
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           COVERALLS_FLAG_NAME: ${{ matrix.python-version }}
@@ -93,10 +93,10 @@ jobs:
           then
             # build whls on windows
             pip install wheel
-            python setup.py bdist_wheel --dist-dir artifacts/dist
+            python -m build --wheel --outdir artifacts/dist
           else
             # build dist on linux
-            python setup.py sdist --dist-dir artifacts/dist
+            python -m build --sdist --outdir artifacts/dist
           fi
           ls artifacts/dist
           twine check artifacts/dist/*
@@ -114,7 +114,7 @@ jobs:
     steps:
       - name: Finished
         run: |
-          pip3 install --upgrade coveralls && coveralls --service=github --finish
+          pip3 install --upgrade coveralls && coveralls --service=github-actions --finish
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
